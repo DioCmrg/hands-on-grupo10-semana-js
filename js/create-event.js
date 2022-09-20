@@ -1,45 +1,40 @@
-const sendButton = document.querySelector("[data-send]")
+// Declarando variaveis (input---) que irão receber através do metodo (.querySelector) 
+// elementos html pelo atributo ID (#) e o elemento (form).
+const inputNome = document.querySelector('#nome')
+const inputAtracao = document.querySelector('#atracoes')
+const inputDescricao = document.querySelector('#descricao')
+const inputData = document.querySelector('#data')
+const inputLotacao = document.querySelector('#lotacao')
+const form = document.querySelector('form')
 
-const createEvent = () => {
-    const nameElement = document.querySelector("[data-name]")
-    const attractionsElement = document.querySelector("[data-attractions]")
-    const descriptionElement = document.querySelector("[data-description]")
-    const dateElement = document.querySelector("[data-date]")
-    const capacityElement = document.querySelector("[data-capacity]")
+// Quando a variavel (form) for submetida (onsubmit), ira execultar uma função assíncrona.
+form.onsubmit = async (e) => {
+    e.preventDefault();
+    const data = new Date(inputData.value).toISOString();
 
-    let listAttrations = (attractionsElement.value).split(",")
-
-    if (nameElement.value != "" && 
-        attractionsElement.value != "" && 
-        descriptionElement.value != "" &&
-        dateElement.value != "" && 
-        capacityElement.value != "") {
-
-        let _data = {
-            "name": nameElement.value,
-            "poster": "link da imagem",
-            "attractions": listAttrations,
-            "description": descriptionElement.value,
-            "scheduled": dateElement.value,
-            "number_tickets": capacityElement.value
-        }
-
-        fetch('https://xp41-soundgarden-api.herokuapp.com/events', {
-            method: "POST",
-            body: JSON.stringify(_data),
-            headers: { "Content-type": "application/json; charset=UTF-8" }
-        }
-        )
-            .then(response => response.json())
-            .then(json => console.log(json))
-            .catch(err => console.log(err))
-    } else {
-        alert("Preencha todos os campos!")
+    // Declarando a variavel (raw) que ira receber os dados Cadastro Novo Evento e criar um objeto conforme a API indica.
+    var raw = {
+        name: inputNome.value,
+        "poster": "link da imagem",
+        attractions: inputAtracao.value.split(','),
+        description: inputAtracao.value,
+        scheduled: data,
+        number_tickets: inputLotacao.value,
     }
-
-}
-
-sendButton.onclick = () => {
-    //e.preventDefault()
-    createEvent()
+    
+    // Declarando variavel (request) que converte os dados recebidos pela var (raw) para formato JSON (JSON.stringify).
+    // E através do metodo POST envia os dados para API.    
+    var request = {
+        method: 'post',
+        body: JSON.stringify(raw),
+        redirect:'follow', 
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }
+    // Aguarda (await) o metodo (fetch) socitiar (request) o POST dos dados na API (endpoint).
+    await fetch("https://xp41-soundgarden-api.herokuapp.com/events", request)
+    .then(response => response.json())
+    .then(result => console.log(result))
+    .catch(error => alert('Não foi possivel cadastrar evento.\nPreencha os dados e tente novamente'));
 }
