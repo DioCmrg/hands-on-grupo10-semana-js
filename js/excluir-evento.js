@@ -22,7 +22,7 @@ const url_base = "https://xp41-soundgarden-api.herokuapp.com/events/";
 const idEvento = window.location.search.split("?")[1];
 const nomeEventoId = "";
 
-async function excluirEvento() {
+async function evento() {
   try {
     const url = await fetch(`${url_base}`);
     const urlIdEvento = await url.json();
@@ -47,7 +47,7 @@ async function excluirEvento() {
     console.log(error);
   }
 }
-excluirEvento();
+evento();
 
 async function excluir() {
   try {
