@@ -5,49 +5,39 @@ const descricaoEvento = document.querySelector("#descricao");
 const dataEvento = document.querySelector("#data");
 const lotacaoEvento = document.querySelector("#lotacao");
 
-function limparHtml() {
-  nomeEvento.setAttribute("value", "");
-  bannerEvento.setAttribute("value", "");
-  atracoesEvento.setAttribute("value", "");
-  descricaoEvento.innerHTML = "";
-  dataEvento.setAttribute("value", "");
-  lotacaoEvento.setAttribute("value", "");
-}
-
-limparHtml();
-
+const urlParametros = new URLSearchParams(window.location.search);
+const meuParametro = urlParametros.get("id");
 const btn_excluir = document.querySelector(".btn-danger");
-const url_base = "https://xp41-soundgarden-api.herokuapp.com/events/";
 
-const idEvento = window.location.search.split("?")[1];
 const nomeEventoId = "";
+
+//get por ID puxando infos do evento pelo botão da pag admin
 
 async function evento() {
   try {
-    const url = await fetch(`${url_base}`);
+    const url = await fetch(
+      `https://xp41-soundgarden-api.herokuapp.com/events/${meuParametro}`,
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
     const urlIdEvento = await url.json();
-
+    console.log(urlIdEvento);
     console.log("resposta:", urlIdEvento);
 
-    urlIdEvento.forEach((evento, index) => {
-      if (evento._id == idEvento) {
-        const data = new Date(evento.scheduled);
-        nomeEvento.setAttribute("value", `${evento.name}`);
-        bannerEvento.setAttribute("value", `${evento.poster}`);
-        atracoesEvento.setAttribute("value", `${evento.attractions}`);
-        descricaoEvento.innerHTML = `${evento.description}`;
-        dataEvento.setAttribute("value", `${data.toLocaleDateString()}`);
-        lotacaoEvento.setAttribute("value", `${evento.number_tickets}`);
-        console.log(index);
-
-        nomeEventoId = `${evento.name}`;
-      }
-    });
+    nomeEvento.value = urlIdEvento.name;
+    bannerEvento.value = urlIdEvento.poster;
+    atracoesEvento.value = urlIdEvento.attractions;
+    descricaoEvento.value = urlIdEvento.description;
+    dataEvento.value = urlIdEvento.scheduled;
+    lotacaoEvento.value = urlIdEvento.number_tickets;
   } catch (error) {
     console.log(error);
   }
 }
 evento();
+
+// função para excluir dados do evento selecionado pelo ID
 
 async function excluir() {
   try {
@@ -63,7 +53,10 @@ async function excluir() {
   }
 }
 
+// evento no botão para realizar a exclusão.
+
 btn_excluir.onclick = (event) => {
   event.preventDefault();
-  excluirParaSempre();
+  alert("Seu evento foi excluido.");
+  window.location.href = "admin.html";
 };

@@ -19,19 +19,17 @@ listaEventos = async (e) => {
         <td>${e.name}</td>
         <td>${e.attractions}</td>
         <td>
-            <a href="reservas.html?id=${
-              e._id
-            }" class="btn btn-dark">ver reservas</a>
-            <a href="editar-evento.html?id=${e._id}&nome=${e.name}&banner=${
-        e.poster
-      }&descricao=${e.description}&data=${e.scheduled}&ingressos=${
-        e.number_tickets
-      }&atracoes=${e.attractions}"" class="btn btn-secondary">editar</a>
-            <a href="excluir-evento.html?id=${e._id}&nome=${e.name}&banner=${
-        e.poster
-      }&descricao=${e.description}&data=${e.scheduled}&ingressos=${
-        e.number_tickets
-      }&atracoes=${e.attractions}"" class="btn btn-danger">excluir</a>
+
+        <a href="reservas.html?id=${
+          e._id
+        }" class="btn btn-dark">ver reservas</a>
+        <a href="editar-evento.html?id=${
+          e._id
+        }" class="btn btn-secondary">editar</a>
+        <a href="excluir-evento.html?id=${
+          e._id
+        }" class="btn btn-danger">excluir</a>
+
         </td>
         </tr>`;
 
