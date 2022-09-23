@@ -54,13 +54,6 @@ newForm.onsubmit = async (e) => {
     };
     console.log(novoEvento);
 
-    const novoEvento = {
-      name: inputNome.value,
-      email: inputEmail.value,
-      number_tickets: inputTickets.value,
-    };
-    console.log(novoEvento);
-
     const respostaEdit = await fetch(
       `https://xp41-soundgarden-api.herokuapp.com/bookings/${idUrl}`,
       {
