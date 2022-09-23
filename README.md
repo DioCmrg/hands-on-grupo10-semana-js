@@ -1,6 +1,5 @@
 # :construction: Projeto em Construção :construction:
- 
-![preview]()
+
 
 [🔗 Clique aqui para acessar](https://diocmrg.github.io/hands-on-grupo10-semana-js/)
 
