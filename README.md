@@ -14,4 +14,4 @@
 
 ## 💚 Colaboradores
 
-Diovane Camargo | Nayara Sousa | Ricardo Geneolle
+Diovane Camargo  |  Nayara Sousa  |  Ricardo Geneolle
