@@ -1,4 +1,4 @@
-listaEventos = async (e) => {
+listaEventos = async (evento) => {
 url_base = "https://xp41-soundgarden-api.herokuapp.com"
 
 try {
@@ -10,19 +10,19 @@ try {
 
     const conteudo = await resposta.json(); 
 
-    conteudo.forEach((e , i)=> {
+    conteudo.forEach((evento , i)=> {
         const todosEventos = document.querySelector("tbody");
 
         const novosEventos = document.createElement("tr");
         novosEventos.innerHTML = `<th scope="row">${i+1}</th>
-        <td>${e.scheduled}</td>
-        <td>${e.name}</td>
-        <td>${e.attractions}</td>
+        <td>${evento.scheduled}</td>
+        <td>${evento.name}</td>
+        <td>${evento.attractions}</td>
         <td>
-            <a href="reservas.html?id=${e._id}" class="btn btn-dark">ver reservas</a>
-            <a href="editar-evento.html?id=${e._id}&nome=${e.name}&banner=${e.poster}&descricao=${e.description}&data=${e.scheduled}&ingressos=${e.number_tickets}&atracoes=${e.attractions}"" class="btn btn-secondary">editar</a>
-            <a href="excluir-evento.html?id=${e._id}&nome=${e.name}&banner=${e.poster}&descricao=${e.description}&data=${e.scheduled}&ingressos=${e.number_tickets}&atracoes=${e.attractions}"" class="btn btn-danger">excluir</a>
-        </td>
+            <a href="reservas.html?id=${evento._id}" class="btn btn-dark">ver reservas</a>
+            <a href="editar-evento.html?id=${evento._id}" class="btn btn-secondary">editar</a>
+            <a href="excluir-evento.html?id=${evento._id}" class="btn btn-danger">excluir</a>
+            </td>
         </tr>`
 
         todosEventos.appendChild(novosEventos);
