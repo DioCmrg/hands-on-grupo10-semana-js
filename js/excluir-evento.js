@@ -60,3 +60,5 @@ btn_excluir.onclick = (event) => {
   alert("Seu evento foi excluido.");
   window.location.href = "admin.html";
 };
+
+// fim
