@@ -9,34 +9,63 @@ const inputIngressos = document.querySelector('#lotacao');
 const btnEnviar = document.querySelector('#enviar');
 const btnConfirmar = document.querySelector('#btnConfirmar');
 
-//funções para editar evento
+// PEGANDO OS PARAMETROS VIA URL
+const parametros = new URLSearchParams(window.location.search);
+const pegaId = parametros.get("id")
 
-form.onsubmit = async (e) => {
-    e.preventDefault()
-    url_base = "https://xp41-soundgarden-api.herokuapp.com"
-    const urlParametros = new URLSearchParams(window.location.search);
-    const meuParametro = urlParametros.get('id');
-    const novoEvento = {
+const id = parametros.get("id");
+const nome = parametros.get("nome");
+const banner = parametros.get("banner");
+const atracoes = parametros.get("atracoes");
+const descricao = parametros.get("descricao");
+const data = parametros.get("data");
+const ingressos = parametros.get("ingressos");
+
+async function visualizarDados() {
+    try {
+        const resposta = await fetch(`https://xp41-soundgarden-api.herokuapp.com/events/${pegaId}`)
+        const dados = await resposta.json()
+        console.log(dados)
+
+        inputNome.value = dados.name;
+        inputBanner.value = dados.poster;
+        inputAtracoes.value = dados.attractions;
+        inputDescricao.value = dados.description;
+        inputData.value = new Date(dados.scheduled).toISOString().slice(0, -1);
+        inputIngressos.value = dados.number_tickets;
+
+    } catch (error) {
+        console.log("Chama o Batman")
+    }
+}
+visualizarDados();
+
+// evento no botão para realizar a edição.
+
+form.onsubmit = async (event) => {
+    event.preventDefault();
+    const raw = {
         name: inputNome.value,
         poster: inputBanner.value,
-        attractions: inputAtracoes.value.split(","),
+        attractions: inputAtracoes.value.split(','),
         description: inputDescricao.value,
         scheduled: new Date(inputData.value).toISOString(),
-        number_tickets: inputIngressos.value
-    }
+        number_tickets: inputIngressos.value,
+    };
+    console.log(raw)
     try {
-        const res = await fetch(`${url_base}/events/${meuParametro}`, {
-            method: "PUT",
-            body: JSON.stringify(novoEvento),
-            headers: { "Content-type": "application/json; charset=UTF-8" }
-        })
-        if (res.status == 200) {
-            alert('Evento editado com sucesso!')
-        }
-        const eventoCriado = await res.json()
-        console.log(eventoCriado)
-    }
-    catch (error) {
-        console.log(error);
-    }
+
+        const editado = await fetch(`https://xp41-soundgarden-api.herokuapp.com/events/${pegaId}`, {
+            method: 'PUT',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(raw)
+        });
+        console.log("foi editado: " + editado);
+        alert("Seu evento foi editado.");
+        window.location.href = "admin.html";
+    } catch (error) {
+        console.log("Chama o Batman")
+    };
 };
