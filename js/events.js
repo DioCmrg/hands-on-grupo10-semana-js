@@ -18,7 +18,7 @@ async function verEventos() {
             <h2>${event.name} - ${new Date(event.scheduled).toLocaleDateString()}</h2>
             <h4>${event.attractions}</h4>
             <p>${event.description}</p>
-            <a href="#" class="btn btn-primary">reservar ingresso</a>
+            <a href="./reservas.html" class="btn btn-primary">reservar ingresso</a>
         </article>`;
 
             clEvento.innerHTML += cardEv
