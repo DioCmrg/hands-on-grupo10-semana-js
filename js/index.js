@@ -30,7 +30,7 @@ async function viewEvent() {
             
         });
     } catch (error) {
-        console.log("ta dando pau no eventos " + error)
+        console.log("Resolve isso aqui primeiro " + error)
         
     }
     
