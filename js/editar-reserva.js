@@ -64,7 +64,7 @@ newForm.onsubmit = async (e) => {
 
         });
         console.log(respostaEdit);
-        alert("Reversa Editada! API não permite PUT")
+        alert("Reversa Editada! \n API não permite PUT")
         window.location.href = "reservas.html";
 
     } catch (error) {
