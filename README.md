@@ -1,8 +1,8 @@
 # :construction: Projeto em Construção :construction:
  
-![preview](./.github/preview.png)
+![preview]()
 
-[🔗 Clique aqui para acessar](https://diocmrg.github.io/nlwExplorer/)
+[🔗 Clique aqui para acessar](https://diocmrg.github.io/hands-on-grupo10-semana-js/)
 
  > Consumo de API
 
