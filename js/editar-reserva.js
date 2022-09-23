@@ -54,6 +54,13 @@ newForm.onsubmit = async (e) => {
     };
     console.log(novoEvento);
 
+    const novoEvento = {
+      name: inputNome.value,
+      email: inputEmail.value,
+      number_tickets: inputTickets.value,
+    };
+    console.log(novoEvento);
+
     const respostaEdit = await fetch(
       `https://xp41-soundgarden-api.herokuapp.com/bookings/${idUrl}`,
       {
@@ -66,7 +73,7 @@ newForm.onsubmit = async (e) => {
       }
     );
     console.log(respostaEdit);
-    alert("Reversa Editada! API não permite PUT");
+    alert("Reversa Editada! \n API não permite PUT");
     window.location.href = "reservas.html";
   } catch (error) {
     console.log("Chama o Batman: " + error);

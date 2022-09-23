@@ -27,7 +27,7 @@ async function verEventos() {
 
         });
     } catch (error) {
-        console.log("ta dando pau no eventos " + error)
+        console.log("ta dando pau no eventos " + error)             
 
     }
 
